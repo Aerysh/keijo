@@ -1,28 +1,20 @@
-import { Camera, CameraType } from "expo-camera";
+import { Camera } from "expo-camera";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import useChangeCamera from "./src/hooks/useChangeCamera";
+import useChangeRatio from "./src/hooks/useChangeRatio";
+
 export default function App() {
-  const [cameraType, setCameraType] = useState(CameraType.back);
-  const [cameraPermission, setCameraPermission] = useState(null);
-  const [ratio, setRatio] = useState("4:3");
-  const [containerRatio, setContainerRatio] = useState(3 / 4);
+  const [cameraPermission, setCameraPermission] = useState(null)
+
+  const { cameraType, changeCamera } = useChangeCamera();
+  const { ratio, containerRatio, changeRatio } = useChangeRatio()
 
   const requestPermission = async () => {
     const permission = await Camera.requestCameraPermissionsAsync();
     setCameraPermission(permission.status === "granted");
-  };
-
-  const changeRatio = async () => {
-    setRatio(ratio === "4:3" ? "16:9" : "4:3");
-    setContainerRatio(containerRatio === 3 / 4 ? 9 / 16 : 3 / 4);
-  };
-
-  const changeCameraType = async () => {
-    setCameraType(
-      cameraType == CameraType.back ? CameraType.front : CameraType.back
-    );
   };
 
   useEffect(() => {
@@ -89,7 +81,7 @@ export default function App() {
           }}
         >
           <TouchableOpacity
-            onPress={() => changeCameraType()}
+            onPress={() => changeCamera()}
             style={{
               width: 70,
               height: 70,
