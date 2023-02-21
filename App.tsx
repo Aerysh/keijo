@@ -5,12 +5,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import useChangeCamera from "./src/hooks/useChangeCamera";
 import useChangeRatio from "./src/hooks/useChangeRatio";
+import RoundedButton from "./src/components/ui/rounded-button";
+import SettingsButton from "./src/components/ui/settings-button";
 
 export default function App() {
-  const [cameraPermission, setCameraPermission] = useState(null)
+  const [cameraPermission, setCameraPermission] = useState(null);
 
   const { cameraType, changeCamera } = useChangeCamera();
-  const { ratio, containerRatio, changeRatio } = useChangeRatio()
+  const { ratio, containerRatio, changeRatio } = useChangeRatio();
 
   const requestPermission = async () => {
     const permission = await Camera.requestCameraPermissionsAsync();
@@ -46,26 +48,7 @@ export default function App() {
                 flexDirection: "row",
               }}
             >
-              <View
-                style={{
-                  position: "absolute",
-                  left: "5%",
-                  top: "10%",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => changeRatio()} // change this to a dedicated button after the settings menu is done
-                  style={{
-                    backgroundColor: "transparent",
-                    height: 24,
-                    width: 24,
-                  }}
-                >
-                  <FontAwesome5 name="cog" size={24} color="#cdd6f4" />
-                </TouchableOpacity>
-              </View>
+              <SettingsButton onPress={() => changeRatio()} />
             </View>
           </Camera>
         </View>
@@ -80,33 +63,21 @@ export default function App() {
             padding: 20,
           }}
         >
-          <TouchableOpacity
+          <RoundedButton
             onPress={() => changeCamera()}
-            style={{
-              width: 70,
-              height: 70,
-              borderRadius: 50,
-              backgroundColor: "transparent",
-              alignItems: "center",
-              alignContent: "center",
-              justifyContent: "center",
-              borderColor: "#b4befe",
-              borderWidth: 2,
-            }}
-          >
-            <FontAwesome5 name="sync" size={36} color="#cdd6f4" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => console.log("Capture Image")}
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: 50,
-              backgroundColor: "#cdd6f4",
-              borderColor: "#b4befe",
-              borderWidth: 4,
-            }}
+            icon="sync"
+            iconSize={36}
+            iconColor="#cdd6f4"
           />
+
+          <RoundedButton
+            onPress={() => console.log("Capture Image")}
+            width="80px"
+            height="80px"
+            backgroundColor="#cdd6f4"
+          />
+
+          {/* change the child of this component to a preview of the most recently taken photo */}
           <TouchableOpacity
             onPress={() => console.log("Open Image Preview")}
             style={{
