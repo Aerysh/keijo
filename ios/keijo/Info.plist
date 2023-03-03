@@ -47,9 +47,9 @@
       </dict>
     </dict>
     <key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to your Camera.</string>
+    <string>Allow $(PRODUCT_NAME) to access your Camera.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>$(PRODUCT_NAME) needs access to your Microphone.</string>
+    <string>Allow $(PRODUCT_NAME) to access your Microphone.</string>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
