@@ -13,7 +13,7 @@
     "@types/react": "~18.0.24",
     "@types/react-native": "~0.70.6",
     "babel-plugin-styled-components": "^2.0.7",
-    "expo": "^48.0.4",
+    "expo": "^48.0.6",
     "expo-camera": "~13.2.1",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
